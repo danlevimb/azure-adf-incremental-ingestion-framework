@@ -1,0 +1,28 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Logs
+*.log
+
+# Secrets / local config
+.env
+*.env
+local.settings.json
+*.connectionstrings
+*.secrets
+secrets/
+credentials/
+*.key
+
+# Azure / ADF local temp
+.azuredatastudio/
+.azure/
