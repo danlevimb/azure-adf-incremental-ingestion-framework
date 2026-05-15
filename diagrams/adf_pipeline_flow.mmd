@@ -1,0 +1,52 @@
+flowchart TD
+    A["PL_00_Master_Ingestion_Orchestrator"] --> B["ACT_Lookup_Active_Source_Objects"]
+    B --> C["ACT_ForEach_Source_Object"]
+    C --> D{"ACT_IF_Source_Is_SQL"}
+
+    D -- "SQL_TABLE" --> E["ACT_Execute_SQL_Ingestion"]
+    D -- "CSV_FILE / JSON_FILE" --> F["ACT_Execute_File_Ingestion"]
+
+    E --> SQLPIPE["PL_01_SQL_Incremental_Ingestion"]
+    F --> FILEPIPE["PL_02_File_Ingestion"]
+
+    subgraph SQL["PL_01_SQL_Incremental_Ingestion"]
+        S1["ACT_Lookup_Source_Config"]
+        S2["ACT_Lookup_Current_High_Watermark"]
+        S3["ACT_Lookup_Start_Ingestion_Run"]
+        S4["ACT_Copy_SQL_To_ADLS"]
+        S5["ACT_Lookup_Complete_Ingestion_Run"]
+        S6["ACT_SP_Update_Watermark"]
+        S7["ACT_SP_Fail_Ingestion_Run"]
+
+        S1 --> S2 --> S3 --> S4
+        S4 -- "Success" --> S5 --> S6
+        S4 -- "Failure" --> S7
+    end
+
+    subgraph FILES["PL_02_File_Ingestion"]
+        F1["ACT_Lookup_File_Source_Config"]
+        F2["ACT_Lookup_Start_File_Ingestion_Run"]
+        F3{"ACT_IF_File_Is_CSV"}
+        F4["ACT_Copy_CSV_To_Bronze"]
+        F5["ACT_Copy_JSON_To_Bronze"]
+        F6["ACT_Lookup_Complete_CSV_Ingestion_Run"]
+        F7["ACT_Lookup_Complete_JSON_Ingestion_Run"]
+        F8["ACT_SP_Fail_CSV_Ingestion_Run"]
+        F9["ACT_SP_Fail_JSON_Ingestion_Run"]
+
+        F1 --> F2 --> F3
+        F3 -- "CSV_FILE" --> F4
+        F3 -- "JSON_FILE" --> F5
+        F4 -- "Success" --> F6
+        F5 -- "Success" --> F7
+        F4 -- "Failure" --> F8
+        F5 -- "Failure" --> F9
+    end
+
+    SQLSERVER[("SQL Server Local<br/>dbo + ctl schemas")]
+    ADLS[("ADLS Gen2<br/>landing / bronze / rejected / metadata / evidence")]
+
+    SQLSERVER --> SQLPIPE
+    SQLPIPE --> ADLS
+    ADLS --> FILEPIPE
+    FILEPIPE --> ADLS
