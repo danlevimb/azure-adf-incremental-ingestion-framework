@@ -1,0 +1,9 @@
+CountryCode,CountryName,CurrencyCode,CurrencyName,IsActive
+MX,Mexico,MXN,Mexican Peso,1
+US,United States,USD,US Dollar,1
+CA,Canada,CAD,Canadian Dollar,1
+ES,Spain,EUR,Euro,1
+FR,France,EUR,Euro,1
+DE,Germany,EUR,Euro,1
+JP,Japan,JPY,Japanese Yen,1
+BR,Brazil,BRL,Brazilian Real,1

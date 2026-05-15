@@ -1,0 +1,10 @@
+RateDate,BaseCurrency,TargetCurrency,ExchangeRate,SourceSystem
+2026-05-01,USD,MXN,17.0500,reference_files
+2026-05-01,EUR,MXN,18.4200,reference_files
+2026-05-01,USD,EUR,0.9250,reference_files
+2026-05-02,USD,MXN,17.0800,reference_files
+2026-05-02,EUR,MXN,18.4600,reference_files
+2026-05-02,USD,EUR,0.9265,reference_files
+2026-05-03,USD,MXN,17.1100,reference_files
+2026-05-03,EUR,MXN,18.5000,reference_files
+2026-05-03,USD,EUR,0.9280,reference_files

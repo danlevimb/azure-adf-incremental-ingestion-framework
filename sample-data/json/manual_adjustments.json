@@ -1,0 +1,23 @@
+{
+  "adjustment_batch_id": "ADJ-2026-05-001",
+  "source_system_name": "reference_files",
+  "created_at": "2026-05-11T00:00:00.000Z",
+  "adjustments": [
+    {
+      "adjustment_id": "ADJ-0001",
+      "entity_type": "Order",
+      "entity_reference": "ORD-00002",
+      "adjustment_type": "REFUND_REVIEW",
+      "reason": "Manual review marker for refund scenario testing.",
+      "is_active": true
+    },
+    {
+      "adjustment_id": "ADJ-0002",
+      "entity_type": "Customer",
+      "entity_reference": "CUST-0001",
+      "adjustment_type": "CONTACT_UPDATE_REVIEW",
+      "reason": "Manual review marker for incremental update scenario testing.",
+      "is_active": true
+    }
+  ]
+}

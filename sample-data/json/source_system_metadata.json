@@ -1,0 +1,38 @@
+{
+  "source_system_name": "sales_local",
+  "source_type": "SQL Server",
+  "environment": "dev",
+  "description": "Local SQL Server source system used for the ADF incremental ingestion framework.",
+  "tables": [
+    {
+      "schema": "dbo",
+      "table": "Customers",
+      "load_type": "INCREMENTAL",
+      "watermark_column": "UpdatedAt"
+    },
+    {
+      "schema": "dbo",
+      "table": "Products",
+      "load_type": "INCREMENTAL",
+      "watermark_column": "UpdatedAt"
+    },
+    {
+      "schema": "dbo",
+      "table": "Orders",
+      "load_type": "INCREMENTAL",
+      "watermark_column": "UpdatedAt"
+    },
+    {
+      "schema": "dbo",
+      "table": "OrderItems",
+      "load_type": "INCREMENTAL",
+      "watermark_column": "UpdatedAt"
+    },
+    {
+      "schema": "dbo",
+      "table": "Payments",
+      "load_type": "INCREMENTAL",
+      "watermark_column": "UpdatedAt"
+    }
+  ]
+}
