@@ -140,8 +140,8 @@ These screenshots prove that CSV and JSON file ingestion works.
 
 These screenshots prove that the master pipeline correctly routes source objects to child pipelines.
 
-| Evidence                                          | Description                                                                       |
-| ------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Evidence  | Description |
+|-----------|-------------|
 | `53_master_orchestrator_files_success.png`        | Master orchestrator routed file sources to the file ingestion pipeline.           |
 | `54_master_orchestrator_sql_success.png`          | Master orchestrator routed SQL sources to the SQL incremental ingestion pipeline. |
 | `55_operational_control_summary_after_master.png` | Control metadata summarized successful master orchestrator results.               |
