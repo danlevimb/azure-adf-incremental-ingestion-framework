@@ -33,7 +33,7 @@ ctl
 
 The `ctl` schema separates operational metadata from source business data.
 
-Source data lives under:
+Source data lives under user / application schemas:
 
 ```sql
 dbo
@@ -370,6 +370,8 @@ File ingestion does not update SQL table watermarks.
 ---
 
 ## Watermark Governance Rules
+
+![Control Metadata Design](../../diagrams/03_control_metadata_watermark_flow.png)
 
 The framework follows these rules:
 

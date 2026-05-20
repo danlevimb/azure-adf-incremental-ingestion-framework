@@ -16,6 +16,8 @@ The goal is to support repeatable incremental ingestion while preventing data lo
 
 ## Strategy Summary
 
+![Control Metadata Design](../../diagrams/03_control_metadata_watermark_flow.png)
+
 The approved MVP strategy is:
 
 ```text
