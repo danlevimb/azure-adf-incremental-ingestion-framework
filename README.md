@@ -19,29 +19,16 @@ The goal is to demonstrate a practical ingestion framework pattern similar to wh
 
 ## Architecture Summary
 
-The project uses a hybrid ingestion architecture:
+The project follows a three-layer architecture designed to separate source systems, pipeline orchestration, and lake storage responsibilities:
 
-```text
-SQL Server Local
-    ↓
-Self-hosted Integration Runtime
-    ↓
-Azure Data Factory
-    ↓
-Azure Data Lake Storage Gen2
-```
 
-File-based ingestion follows this pattern:
+* **Input Layer**
+* **Orchestration Layer**
+* **Storage Layer** 
 
-```text
-ADLS Gen2 landing
-    ↓
-Azure Data Factory
-    ↓
-ADLS Gen2 bronze
-```
+![High level architecture](diagrams/01_high_level_architecture.png)
 
-The framework uses SQL Server control metadata to drive source discovery, routing, logging, watermark tracking, and retry-safe execution.
+A control metadata layer supports the orchestration process by driving source discovery, routing, execution logging, watermark tracking, and retry-safe behavior.
 
 ---
 

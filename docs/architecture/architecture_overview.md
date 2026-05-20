@@ -18,39 +18,10 @@ and lands the data into Azure Data Lake Storage Gen2 using parameterized pipelin
 
 The goal is to demonstrate a professional Azure Data Engineering ingestion pattern rather than a simple one-off copy pipeline.
 
----
-
 ## High-Level Architecture
 
-```mermaid
-flowchart LR
-    SQL[("SQL Server Local<br/>ADF_Ingestion_Source")]
-    SHIR["Self-hosted Integration Runtime<br/>shir-local-sql-dev"]
-    ADF["Azure Data Factory<br/>adf-incremental-ingestion-dev"]
-    ADLS[("ADLS Gen2<br/>stgadfingdan01")]
-    LANDING["landing<br/>CSV / JSON source files"]
-    BRONZE["bronze<br/>SQL Parquet + CSV/JSON copies"]
-    CTL["Control Metadata<br/>ctl.SourceObject<br/>ctl.IngestionRun<br/>ctl.WatermarkHistory"]
+![High level architecture](../../diagrams/01_high_level_architecture.png)
 
-    SQL --> SHIR --> ADF
-    ADF --> ADLS
-    ADLS --> LANDING
-    ADLS --> BRONZE
-
-    SQL --> CTL
-    CTL --> ADF
-    ADF --> CTL
-
-    subgraph Pipelines["ADF Pipelines"]
-        P0["PL_00_Master_Ingestion_Orchestrator"]
-        P1["PL_01_SQL_Incremental_Ingestion"]
-        P2["PL_02_File_Ingestion"]
-    end
-
-    ADF --> Pipelines
-    P0 --> P1
-    P0 --> P2
-```
 
 ## Main Components
 
