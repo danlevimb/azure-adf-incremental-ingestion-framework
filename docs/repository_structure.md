@@ -4,6 +4,8 @@ This repository contains the implementation, documentation, evidence, scripts, a
 
 The project demonstrates a metadata-driven incremental ingestion framework using Azure Data Factory, SQL Server local, Azure Data Lake Storage Gen2, control tables, watermarks, operational logging, and validation evidence.
 
+![Repository Map](../diagrams/05_repository_documentation_map.png)
+
 ## Root Structure
 
 | Path | Purpose |
