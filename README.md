@@ -1,4 +1,10 @@
-# Azure ADF Incremental Ingestion Framework
+<p align="center">
+  <img src="diagrams/banner.png" width="900"/>
+</p>
+
+<p align="center">
+  <h1>Azure ADF Incremental Ingestion Framework
+</p>
 
 ## Overview
 
