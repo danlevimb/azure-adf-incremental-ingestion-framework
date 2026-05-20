@@ -32,6 +32,12 @@ A control metadata layer supports the orchestration process by driving source di
 
 ---
 
+## End-to-End Flow
+
+![End to End flow](diagrams/04_end_to_end_ingestion_flow.png)
+
+---
+
 ## Main Components
 
 | Component | Purpose |

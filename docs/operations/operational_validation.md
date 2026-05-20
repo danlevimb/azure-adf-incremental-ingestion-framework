@@ -194,6 +194,8 @@ For a successful file ingestion run:
 
 ## Control Metadata Validation
 
+![End to End flow](../../diagrams/04_end_to_end_ingestion_flow.png)
+
 The framework uses SQL Server control metadata to validate operational behavior.
 
 Important control tables:
