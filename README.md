@@ -130,6 +130,8 @@ A control metadata layer supports the orchestration process by driving source di
 
 ## Azure Data Factory Pipelines
 
+![ADF orchestration flow](diagrams/02_adf_orchestration_flow.png)
+
 | Pipeline | Purpose |
 |----------|---------|
 | `PL_00_Master_Ingestion_Orchestrator` | Reads active source objects and routes execution to SQL or file ingestion pipelines. |
@@ -214,6 +216,8 @@ bronze/files/<format>/<source_object>/load_date=YYYY-MM-DD/run_id=<run_id>/<file
 ---
 
 ## Watermark Strategy
+
+![Control metadata and watermark flow](diagrams/03_control_metadata_watermark_flow.png)
 
 The SQL ingestion framework uses this extraction window:
 
@@ -325,6 +329,8 @@ Important evidence includes:
 ---
 
 ## Documentation
+
+![Repository documentation map](diagrams/05_repository_documentation_map.png)
 
 ### Architecture
 
