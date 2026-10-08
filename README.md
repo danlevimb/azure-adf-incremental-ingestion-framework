@@ -1,27 +1,79 @@
 <p align="center">
-  <img src="diagrams/banner.png" width="900"/>
+  <img src="diagrams/banner.png" width="900" alt="Azure ADF Incremental Ingestion Framework banner"/>
+</p>
+
+<h1 align="center">Azure ADF Incremental Ingestion Framework</h1>
+
+<p align="center">
+  Metadata-driven batch ingestion across SQL Server, CSV, and JSON sources using Azure Data Factory, ADLS Gen2, control tables, watermarks, and failure-safe retry behavior.
 </p>
 
 <p align="center">
-  <h1>Azure ADF Incremental Ingestion Framework
+  <a href="docs/architecture/architecture_overview.md">Architecture</a> |
+  <a href="docs/architecture/control_metadata_design.md">Control Metadata</a> |
+  <a href="docs/architecture/watermark_strategy.md">Watermarks</a> |
+  <a href="docs/evidence/evidence_index.md">Evidence</a> |
+  <a href="docs/known_limitations_and_future_improvements.md">Limitations</a>
 </p>
 
-## Overview
-
-`azure-adf-incremental-ingestion-framework` is a portfolio-oriented Azure Data Engineering project that demonstrates a metadata-driven incremental ingestion framework using Azure Data Factory, SQL Server, Azure Data Lake Storage Gen2, control tables, watermarks, and operational validation evidence.
-
-The project ingests data from:
-
-* Local SQL Server tables
-* CSV files
-* JSON files
-
-and lands the data into Azure Data Lake Storage Gen2 using reusable pipelines, dynamic datasets, control metadata, and validated failure-safe behavior.
-
-This is not a simple one-off copy demo.
-The goal is to demonstrate a practical ingestion framework pattern similar to what data engineering teams use in real-world batch ingestion workflows.
-
 ---
+
+## The problem
+
+Incremental ingestion becomes difficult when every source is handled as a one-off pipeline.
+
+A reusable framework needs to answer:
+
+- Which source objects are active and how are they configured?
+- How should SQL tables and file sources be routed differently?
+- How can incremental SQL extraction avoid reprocessing already-landed rows?
+- What happens to the watermark when a copy fails?
+- Can failed runs be retried without skipping pending source changes?
+- Can one orchestration pattern support SQL, CSV, and JSON sources with consistent operational logging?
+
+This project focuses on those ingestion-framework problems.
+
+## The idea
+
+Instead of building one pipeline per source object, the implementation uses **control metadata + reusable ADF pipelines**.
+
+The control layer drives source discovery, routing, target paths, execution logging, and watermark state.
+
+```text
+Control metadata
+      ↓
+Master orchestrator
+      ↓
+SQL incremental pipeline ──→ Parquet in ADLS Gen2
+      │
+      └──────────────┐
+                     ↓
+File ingestion pipeline ───→ CSV / JSON into Bronze
+```
+
+The critical reliability rule is simple:
+
+> **The stored watermark advances only after a successful copy.**
+
+That rule is validated through controlled failure and retry scenarios.
+
+## At a glance
+
+| Area | Implementation |
+|---|---|
+| Cloud platform | Microsoft Azure |
+| Orchestration | Azure Data Factory |
+| Primary source | Local SQL Server |
+| Additional sources | CSV and JSON files |
+| Hybrid connectivity | Self-hosted Integration Runtime |
+| Storage | Azure Data Lake Storage Gen2 |
+| SQL target format | Parquet |
+| Framework pattern | Metadata-driven master / child pipelines |
+| Incremental strategy | Datetime `UpdatedAt` watermark |
+| Control plane | SQL Server control tables + stored procedures |
+| Reliability | Watermark advances only after successful copy |
+| Operational validation | Failure, retry, empty run, insert, update, refund |
+| Project status | Completed / portfolio-ready MVP closed |
 
 ## Architecture Summary
 
@@ -471,12 +523,9 @@ This project demonstrates practical skills in:
 
 ## Project Status
 
-```text
-MVP implementation: Completed
-Operational validation: Completed
-Public documentation packaging: Completed
-ADF Git integration: Planned future improvement
-```
+**Completed / portfolio-ready MVP closed.**
+
+ADF Git integration remains a documented future improvement and is not claimed as part of the implemented MVP.
 
 ---
 
@@ -485,9 +534,3 @@ ADF Git integration: Planned future improvement
 This project is provided for portfolio and educational purposes.
 
 See [`LICENSE`](LICENSE).
-
----
-
-## Author
-
-Me 🙃
