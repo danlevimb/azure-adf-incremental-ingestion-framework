@@ -83,6 +83,5 @@ The evidence demonstrates Azure resource setup, ADF connectivity, dynamic datase
 
 ## Evidence Notes
 
-- Screenshots were reviewed before inclusion to avoid exposing secrets or sensitive connection details.
 - Evidence is intended to support portfolio review and technical walkthroughs.
 - Some implementation screenshots were intentionally omitted to keep the public repository concise and recruiter-friendly.
